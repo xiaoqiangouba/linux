@@ -1,0 +1,322 @@
+
+-------------------------------------------------------------liunx环境依赖---------------------------------------------------------------------------------------
+
+liunx环境依赖
+yum install glibc.i686
+yum -y install libaio.so.1 libgcc_s.so.1 libstdc++.so.6
+yum update libstdc++-4.4.7-4.el6.x86_64
+yum install gcc-c++
+
+--------------------------------------------------------------liunx常用命令--------------------------------------------------------------------------------------
+
+rpm  添加或卸载  如：程序安装rpm -ivh 程序名   程序查看 rpm -qa   程序卸载 rpm -e --nodeps 程序名
+yum  相当于可以联网的rpm命令
+
+tar -zxvf 加压压缩包
+解压压缩包
+
+tar -zxv -f apache-tomcat-7.0.75.tar.gz 
+
+
+cd 进入某级目录 如 cd /user/local/java
+cd ../向上一层目录
+cd ~ 到/root目录
+cd /  到最顶层目录  /目录
+cd - 访问上一次的目录 (后两个目录间切换)
+
+
+pwd  查看当级目录的名称
+
+
+
+source 重新加载
+
+mkdir -p /usr/local/java   创建文件夹如 /usr/local/java
+
+
+ls  列出当前文件夹目录
+ls -a 查看所有目录  包括隐藏文件夹
+ls -l 查看详细列表（不包括隐藏文件）
+ls -la或ls -al  查看详情列表和隐藏文件
+ll -h /etc 友好展示详情列表
+
+文件查看 xml 日志
+cat 文件名 快捷查看当前文件内容(只能查看少量信息的文件)
+more 文件名（分页查看）
+   enter   下一行
+   空格键  下一页
+   b       上一页
+   q       推出more
+less -mN 文件名  分页查看并显示行号
+   enter   下一行
+   空格键  下一页
+   b       上一页
+   q       推出more
+tail -数字 文件名  查看后几行的内容
+     如 tail -10 文件名  查看后10行的内容（10-20行）
+
+复制文件 apache-tomcat-7.0.75.tar.gz到/usr/local
+ cp apache-tomcat-7.0.75.tar.gz  /usr/local
+ cp apache-tomcat-7.0.75.tar.gz  /usr/local/tomcat.tar.gz  复制文件到/usr/local并改名为tomcat.tar.gz
+复制文件
+cp -r
+   cp -r t5 t1 将当前的子目录t5复制到当前的子目录t1中 或者cp -r /root/t5 /root/t1
+
+文件/目录 移动
+mv 文件/目录名  /usr/local(移动的位置)
+   mv t5 t1 将当前的子目录t5剪切到当前的子目录t1中 或者mv /root/t5 /root/t1
+   mv -f t5 t1 强制覆盖t1中的t5文件(不询问)
+
+rm 文件名  删除文件
+rm -f 文件名  强制删（不询问）
+rm -rf 目录名（强制删除目录）
+    注意   rm -rf * 删除当前目录的所有子目录
+           rm -rf/* 删除linux系统的所以目录
+
+find /root -name 'heh*' 查找/root下以heh开头的所有目录
+
+vim do.java 查看do.java
+    按 i a o 任意一个键 可进入编辑模式   
+    :wq 保存退出
+    :q! 强制退出 不保存
+
+rpm -qa | grep -i mysql   //查看mysql  -i(忽略大小写查找)
+
+tar -zxvf 压缩包名称 -C /usr/local/java   将压缩包解压在/usr/local/java里
+tar -zxvf 压缩包名称   将压缩包解压在当前目录中
+
+tar -zcvf hehe.tar.gz * 将当前目录所有文件压缩的hehe.tar.gz压缩包里
+
+clear 清屏
+
+ps -ef | grep -i mysql  查看与mysql相关的开启进程
+
+kill -9 进程号（pid）强制关闭pid为几的进程
+
+ifconfig 查看本机 ip等一些信息
+
+ping ip地址  测试和目标ip的连通性（按ctrl+c关闭测试）
+
+reboot 重启linux系统
+halt  关机linux系统
+
+setup   网络设置
+
+
+systemctl start mariadb         #启动MariaDB数据库
+systemctl stop mariadb          #停止MariaDB
+systemctl restart mariadb       #重启MariaDB
+systemctl enable mariadb      #设置开机启动
+
+
+配置环境变量打开
+vi /etc/profile
+
+让设置环境变量生效
+source /etc/profile
+
+开放端口
+
+1.服务器
+firewall-cmd --permanent --zone=public --add-port=8080/udp
+
+firewall-cmd --permanent --zone=public --add-port=8080/tcp
+
+查看服务器开启进程  ps -ef | grep tomcat
+
+2.数据库
+firewall-cmd --permanent --zone=public --add-port=3306/tcp
+
+firewall-cmd --permanent --zone=public --add-port=3306/udp
+
+开启防火墙的命令
+         systemctl start firewalld.service
+关闭防火墙的命令
+        systemctl stop firewalld.service
+开机自动启动
+        systemctl enable firewalld.service
+关闭开机自动启动
+        systemctl disable firewalld.service
+查看防火墙状态
+        systemctl status firewalld下列显示表示没有问题。
+
+防火墙查看已经开放的端口firewall-cmd --list-ports
+
+更新防火墙配置
+firewall-cmd --reload^C（数据库）
+
+firewall-cmd --reload（服务器）
+
+
+启动服务器
+/usr/local/tomcat/apache-tomcat-8.0.50/bin/startup.sh
+关闭服务器
+/usr/local/tomcat/apache-tomcat-8.0.50/bin/shutdown.sh
+
+
+ 
+查看日志   
+cd /usr/local/tomcat/apache-tomcat-8.0.50/logs
+tail -f catalina.out
+ctrl+c 推出
+
+
+----------------------------------------------------快捷键-----------------------------------------------------------------------------------------------------------------
+
+1. 在终端下：
+
+          复制命令：Ctrl + Shift + C  组合键.
+
+          粘贴命令：Ctrl + Shift + V  组合键.
+
+
+
+ 2. 在控制台下：
+
+          复制命令：Ctrl + Insert  组合键　　或　　用鼠标选中即是复制。
+
+          粘贴命令：Shift + Insert  组合键　　或　　单击鼠标滚轮即为粘贴。
+
+---------------------------------------------------------安装mysql-------------------------------------------------------------------------------------------------
+
+安装mysql
+
+yum install mariadb-server mariadb
+
+
+systemctl start mariadb
+
+/usr/bin/mysqladmin -u root password '1230'
+
+mysql -u root -p
+
+-------------------------------------------------------安装redis---------------------------------------------------------------------------------------------------
+redis安装
+
+tar -zxvf 解压redis压缩包
+cd 进入文件夹
+make   编译
+make PREFIX=/usr/local/redis install 将文件复制到/usr/local/redis文件夹中
+cp redis.conf /usr/local/redis 将配置文件复制过去
+
+启动redis
+
+前段启动(无法集群)
+
+cd /usr/local/redis
+./bin/redis-server  启动服务器
+
+cd /usr/local/redis
+./bin/redis-cli    启动客户端(默认连接本机端口6379)
+./bin/redis-cli -h ip地址 -p 端口 如./bin/redis-cli -h 127.0.0.1 -p 6379
+
+后端启动
+
+vi redis.conf  修改配置文件
+daemonize no  改为  yes
+将protected-mode yes 改为no
+
+cd /usr/local/redis
+./bin/redis-server ./redis.conf  启动服务器
+./bin/redis-cli 启动客户端
+
+关闭redis
+./bin/redis-cli shutdown
+
+redis 的数据类型
+key 字符串,
+value 字符串; hash:{"usernam":"张三",...}; list:[1,2,3,4...];set:['a','b'...];有序的set集合:[5000 'a',1000 'b',10 'g'...]
+
+
+keys * 查看我所有设置内容
+
+firewall-cmd --permanent --zone=public --add-port=6379/udp
+firewall-cmd --permanent --zone=public --add-port=6379/tcp
+
+
+String : set username zhangsan  如果赋予相同的key值  value将被覆盖
+         get key  如果key不存在 返回为nil
+         del key  返回数字代表删除几条数据
+         getset key value 先把值获取然后改为相应的value
+         incr key  key 的value自增
+         decr key  key的value自减
+         append password 123 返回值为3 说明password=123
+         append password 456 返回值为6 说明password=123456 并不是覆盖
+         incrby key 10 将key对应的值加10
+         decrby key 10 将key对应的值减10
+flushdb 所有的键值对删除
+hash:    hset hash1 username zhangsan   --------hash1{username=zhagsan}
+         hmset hash2 username lisi age 18 sex man ------hash2{username=lisi,age=18,sex=man}
+         hget hash2 username   -----------------lisi
+         hmget hash2 username age...  ----------------lisi 18 ...
+         hgetall hash2 把hash2中所有value获取出来
+         hdel hash1 username 删除hash1中username
+         del hash2  删除整条hash2
+         hincr hash2 age 10 将hash2的age18加10，等于28
+         hexists hash1 username 判断hash1中是否存在username字段
+         hlen hash2  返回3  说明hash2中有3个字段
+         hkeys hash2  将返回hash2中所有的字段名
+         hvals hash2  将hash2所以的值返回出来
+----------------------------------------------------------------------------安装ftp----------------------------------------------------------------------------------
+
+ 卸载
+rpm -e ftp
+rpm -e vsftpd
+
+安装ftp
+yum install vsftpd 
+
+whereis  vsftpd 查看安装路径   /usr/sbin/vsftpd /etc/vsftpd /usr/share/man/man8/vsftpd.8.gz
+
+
+service vsftpd start 启动
+
+systemctl status vsftpd.service  查看是否启动成功
+
+systemctl enable vsftpd设置开机启动
+
+
+
+
+
+
+
+useradd  /usr/local/ftp -s /sbin/nologin  ftpuser  添加用户（ftpuser）
+
+passwd ftpuser   给ftpuser添加密码
+
+vi /etc/vsftpd/vsftpd.conf
+
+把：anonymous_enable=YES 改为： anonymous_enable=NO
+
+输入--->   :wq!  保存退出
+
+开放端口
+firewall-cmd --permanent --zone=public --add-port=21/tcp
+
+firewall-cmd --permanent --zone=public --add-port=21/udp
+
+重启防火墙
+
+
+
+service vsftpd restart重启vsftpd服务
+service vsftpd stop停止vsftpd服务
+service vsftpd start启动vsftpd服务
+chkconfig --list |grep vsftpd 查询Vsftpd在运行模式下是否开机启动
+
+查看ftp端口
+netstat -auntp | grep ftp 或者 netstat -auntp | grep 21
+
+
+
+
+
+
+
+
+
+
+
+
+
